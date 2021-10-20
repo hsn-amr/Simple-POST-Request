@@ -6,7 +6,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 object APIClient {
 
     private var retrofit: Retrofit? = null
-
     fun getClient(): Retrofit? {
         retrofit = Retrofit.Builder()
             .baseUrl("https://dojo-recipes.herokuapp.com")

@@ -9,7 +9,6 @@ import android.widget.Toast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.create
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,16 +24,16 @@ class MainActivity : AppCompatActivity() {
 
         save.setOnClickListener {
             if(input.text.isNotEmpty()){
-                input.text.clear()
+                val name = Name()
+                name.name = input.text.toString()
                 val apiInterface = APIClient.getClient()?.create(APIInterface::class.java)
 
-                apiInterface!!.addName(input.text.toString()).enqueue(object : Callback<String>{
-                    override fun onResponse(call: Call<String>, response: Response<String>) {
-                        Log.d("TAG", "$response")
+                apiInterface?.addName(name)?.enqueue(object : Callback<Name>{
+                    override fun onResponse(call: Call<Name>, response: Response<Name>) {
                         Toast.makeText(this@MainActivity, "Saved", Toast.LENGTH_LONG).show()
                     }
 
-                    override fun onFailure(call: Call<String>, t: Throwable) {
+                    override fun onFailure(call: Call<Name>, t: Throwable) {
                         Toast.makeText(this@MainActivity, "Try Again", Toast.LENGTH_LONG).show()
                     }
 
